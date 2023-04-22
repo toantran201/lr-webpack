@@ -8,3 +8,6 @@ Notes
 - asset/inline: inline the files into the bundles as a data URI. Can be used when importing small asset files like SVG.
 - asset: Combination of above, if file size is less than 8kb at default this file will be treated as inline asset module.
 - asset/source: Import the source code of the file as it is and injects it into the JS bundle as a string text.
+
+Public path
+- tell webpack which url to use in order to load all the generated files in the browser
