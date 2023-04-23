@@ -1,6 +1,7 @@
-import {helloWorld} from './hello-world.js';
 import {addImage, addSvg} from './add-image.js';
+import HelloButton from "./components/hello-button/hello-button";
 
-helloWorld();
 addImage();
 addSvg();
+const helloButton = new HelloButton();
+helloButton.render();

@@ -1,11 +1,9 @@
 Notes
-
 - npm install webpack webpack-cli
 - npx webpack : run webpack without any configuration at default.
 - npx webpack --stats detailed: print details about the build process.
 
 4 types of asset modules
-
 - asset/resource: files into the output directory and exports the URL to those files.
 - asset/inline:
   - inline the files into the bundles as a data URI. Can be used when importing small asset files like SVG.
@@ -15,5 +13,10 @@ Notes
   - doesn't generate a new file like asset/inline
 
 Public path
-
 - tell webpack which url to use in order to load all the generated files in the browser
+
+Loaders
+- Allow to import all others kinds of files which cannot be handled by using asset modules.
+  - Examples: 
+    - CSS loader reads the contents of the CSS file and return this contents, but it doesn't do anything after
+    - Style loader takes the Css and injects it into the page using style tags. Use style loader to bundle the CSS together with JS into single resulting file.

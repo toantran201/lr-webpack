@@ -1,0 +1,12 @@
+.hello-button {
+    padding: 6px 18px;
+    border-radius: 4px;
+    background: orangered;
+    color: white;
+    outline: none;
+}
+
+.hello-text {
+    color: orangered;
+    text-shadow: 2px 2px gray;
+}

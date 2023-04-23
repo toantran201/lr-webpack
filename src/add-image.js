@@ -8,7 +8,9 @@ export function addImage () {
     img.width = 300;
     img.src = House;
     const body = document.querySelector('body');
-    body.appendChild(img);
+    const div = document.createElement('div');
+    div.appendChild(img);
+    body.appendChild(div);
 }
 
 export function addSvg () {
@@ -17,6 +19,8 @@ export function addSvg () {
     img.width = 20;
     img.src = Apple;
     const body = document.querySelector('body');
-    body.appendChild(img);
+    const div = document.createElement('div');
+    div.appendChild(img);
+    body.appendChild(div);
 }
 
