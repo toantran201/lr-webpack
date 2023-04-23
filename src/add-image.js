@@ -1,9 +1,10 @@
 import House from './house.jpg';
 import Apple from './apple.svg';
+import altText from './altText.txt'
 
 export function addImage () {
     const img = document.createElement('img');
-    img.alt = 'House';
+    img.alt = altText;
     img.width = 300;
     img.src = House;
     const body = document.querySelector('body');
