@@ -20,3 +20,4 @@ Loaders
   - Examples: 
     - CSS loader reads the contents of the CSS file and return this contents, but it doesn't do anything after
     - Style loader takes the Css and injects it into the page using style tags. Use style loader to bundle the CSS together with JS into single resulting file.
+    - For multiple use: pay attention to the order in the array. webpack process the order from right to left.

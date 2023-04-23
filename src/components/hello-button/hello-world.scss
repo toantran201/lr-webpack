@@ -1,0 +1,17 @@
+$font-size: 20px;
+$primary-color: orangered;
+$color-white: #fff;
+
+.hello-button {
+    padding: 6px 18px;
+    border-radius: 4px;
+    background: $primary-color;
+    color: $color-white;
+    outline: none;
+}
+
+.hello-text {
+    color: $primary-color;
+    text-shadow: 2px 2px gray;
+    font-size: $font-size;
+}
