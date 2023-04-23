@@ -10,6 +10,7 @@ module.exports = {
   mode: 'none',
   module: {
     rules: [
+      // ========== Assets ========== //
       {
         test: /\.(png|jpg|svg)$/,
         type: 'asset',
@@ -23,6 +24,7 @@ module.exports = {
         test: /\.txt$/,
         type: 'asset/source',
       },
+      // ========== Stylesheets ========== //
       {
         test: /\.css$/,
         use: [
@@ -34,6 +36,19 @@ module.exports = {
         use: [
           'style-loader', 'css-loader', 'sass-loader' // first, use sass-loader to convert scss to css
         ]
+      },
+      // ========== JS ========== //
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options:{
+            presets: [
+              '@babel/env',  // Compile a script version 6,7,8,9,10... down to script version 5
+            ]
+          }
+        }
       }
     ]
   }
