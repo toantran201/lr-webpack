@@ -29,4 +29,7 @@ Plugins
   - Examples
     - terser-webpack-plugin: minify bundle size
     - mini-css-extract-plugin: separate css to other file from bundle
-  
+  - Browser cache
+    - No need to fetch the file every time
+    - Browser will cache our file by name => Issue user will not receive the new version if we cache the file on browser
+      => Solution: Change the filename each time we deploy new version of code => Webpack auto support
