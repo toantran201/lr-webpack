@@ -1,15 +1,14 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, './dist/'),
   },
-  mode: 'none',
+  mode: 'development', // none | development | production,
+  devtool: 'eval',
   module: {
     rules: [
       // ========== Assets ========== //
@@ -30,13 +29,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader'
+          'style-loader', 'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' // first, use sass-loader to convert scss to css
+          'style-loader', 'css-loader', 'sass-loader' // first, use sass-loader to convert scss to css
         ]
       },
       // ========== JS ========== //
@@ -55,10 +54,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new TerserPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'styles.[contenthash].css'
-    }),
     new HtmlWebpackPlugin({
       title: "Hello world",
       template: './index.html',
