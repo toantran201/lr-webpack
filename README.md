@@ -33,3 +33,7 @@ Plugins
     - No need to fetch the file every time
     - Browser will cache our file by name => Issue user will not receive the new version if we cache the file on browser
       => Solution: Change the filename each time we deploy new version of code => Webpack auto support
+
+Notes:
+  - For the case handle common dependencies between multiple page, webpack only separate the common into other bundle file if the size exceed 30kb, otherwise it
+will include in the page bundle file.

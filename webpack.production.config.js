@@ -8,10 +8,16 @@ module.exports = {
     'house': './src/house.js'
   },
   output: {
-    filename: 'bundle.[name].[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
   },
   mode: 'production', // none | development | production,
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 3000 // 3kb - change default min size to tell webpack bundle separate file if file size over 3kb
+    }
+  },
   module: {
     rules: [
       // ========== Assets ========== //
