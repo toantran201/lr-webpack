@@ -2,9 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry:{
+    'hello-world': './src/hello-world.js',
+    'house': './src/house.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist/'),
   },
   mode: 'development', // none | development | production,
@@ -65,8 +68,24 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: "hello-world.html",
       title: "Hello world",
+      description: "Hello world",
       template: './index.html',
+      chunks: [
+        'hello-world' // chunk name is specified in the entry point object
+      ],
+      minify: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: "house.html",
+      title: "House",
+      description: "House",
+      template: './index.html',
+      chunks: [
+        'house'
+      ],
+      minify: false
     })
   ]
 };
