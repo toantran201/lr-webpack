@@ -3,9 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'hello-world': './src/hello-world.js',
+    'house': './src/house.js'
+  },
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: 'bundle.[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
   },
   mode: 'production', // none | development | production,
@@ -55,11 +58,27 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles.[contenthash].css'
+      filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
+      filename: "hello-world.html",
       title: "Hello world",
+      description: "Hello world",
       template: './index.html',
+      chunks: [
+        'hello-world' // chunk name is specified in the entry point object
+      ],
+      minify: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: "house.html",
+      title: "House",
+      description: "House",
+      template: './index.html',
+      chunks: [
+        'house'
+      ],
+      minify: false
     })
   ]
 };
