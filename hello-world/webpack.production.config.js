@@ -1,27 +1,22 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {ModuleFederationPlugin} = require('webpack').container;
 
 module.exports = {
-  entry:{
-    'hello-world': './src/hello-world.js',
-    'house': './src/house.js'
-  },
+  entry: './src/hello-world.js',
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
+    publicPath: 'http://localhost:9001/',
   },
-  mode: 'development', // none | development | production,
-  devServer: {
-    port: 9000,
-    static: {
-      directory: path.resolve(__dirname, './dist')
-    },
-    devMiddleware: {
-      index: 'index.html',
-      writeToDisk: true
+  mode: 'production', // none | development | production,
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 3000 // 3kb - change default min size to tell webpack bundle separate file if file size over 3kb
     }
   },
-  devtool: 'eval',
   module: {
     rules: [
       // ========== Assets ========== //
@@ -42,13 +37,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader', 'css-loader'
+          MiniCssExtractPlugin.loader, 'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          'style-loader', 'css-loader', 'sass-loader' // first, use sass-loader to convert scss to css
+          MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' // first, use sass-loader to convert scss to css
         ]
       },
       // ========== JS ========== //
@@ -67,25 +62,22 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
     new HtmlWebpackPlugin({
       filename: "hello-world.html",
       title: "Hello world",
       description: "Hello world",
       template: './index.html',
-      chunks: [
-        'hello-world' // chunk name is specified in the entry point object
-      ],
       minify: false
     }),
-    new HtmlWebpackPlugin({
-      filename: "house.html",
-      title: "House",
-      description: "House",
-      template: './index.html',
-      chunks: [
-        'house'
-      ],
-      minify: false
+    new ModuleFederationPlugin({
+      name: 'HelloWorldApplication',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './HelloButton': './src/components/hello-button/hello-button.js'
+      }
     })
   ]
 };

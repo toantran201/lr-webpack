@@ -7,3 +7,9 @@ heading.render();
 
 const houseImage = new HouseImage();
 houseImage.render(upperFirst('house'));
+
+import('HelloWorldApplication/HelloButton').then(HelloButtonModule => {
+  const HelloButton = HelloButtonModule.default;
+  const helloButton = new HelloButton();
+  helloButton.render();
+})

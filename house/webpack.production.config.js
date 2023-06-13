@@ -1,15 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {ModuleFederationPlugin} = require('webpack').container
 
 module.exports = {
-  entry: {
-    'hello-world': './src/hello-world.js',
-    'house': './src/house.js'
-  },
+  entry: './src/house.js',
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
+    publicPath: '/static/'
   },
   mode: 'production', // none | development | production,
   optimization: {
@@ -67,16 +66,6 @@ module.exports = {
       filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
-      filename: "hello-world.html",
-      title: "Hello world",
-      description: "Hello world",
-      template: './index.html',
-      chunks: [
-        'hello-world' // chunk name is specified in the entry point object
-      ],
-      minify: false
-    }),
-    new HtmlWebpackPlugin({
       filename: "house.html",
       title: "House",
       description: "House",
@@ -85,6 +74,12 @@ module.exports = {
         'house'
       ],
       minify: false
+    }),
+    new ModuleFederationPlugin({
+      name: 'HouseApplication',
+      remotes: {
+        HelloWorldApplication: 'HelloWorldApplication@http://localhost:9001/remoteEntry.js'
+      }
     })
   ]
 };
