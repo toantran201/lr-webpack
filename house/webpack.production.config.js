@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
-    publicPath: '/static/'
+    publicPath: 'http://localhost:9002/'
   },
   mode: 'production', // none | development | production,
   optimization: {
@@ -77,6 +77,10 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: 'HouseApplication',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './HousePage': './src/pages/hello-page.js',
+      },
       remotes: {
         HelloWorldApplication: 'HelloWorldApplication@http://localhost:9001/remoteEntry.js'
       }

@@ -7,7 +7,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist/'),
-    publicPath: '/static/'
+    publicPath: 'http://localhost:9002/'
   },
   mode: 'development', // none | development | production,
   devServer: {
@@ -75,6 +75,10 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: 'HouseApplication',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './HousePage': './src/pages/hello-page.js',
+      },
       remotes: {
         HelloWorldApplication: 'HelloWorldApplication@http://localhost:9001/remoteEntry.js'
       }
